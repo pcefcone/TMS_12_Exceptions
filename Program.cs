@@ -8,18 +8,21 @@ internal class Program
     {
         
 
+        
 
         string Login = string.Empty;
         string Password = string.Empty;
         var user = new User(Login, Password);
+
+
 
         while (true)
         {
             Console.WriteLine("Registration form:" +
                 "\n1. Login." +
                 "\n2. Password" +
-                "\n3. Authorization" +
-                "\n4. Save" +
+                "\n3. Save" +
+                "\n4. Authorization" +
                 "\n0. Exit");
             var choise = Console.ReadLine();
             switch (choise)
@@ -48,7 +51,7 @@ internal class Program
                         Console.WriteLine(ex.Message);
                     }
                     break;
-                case "3":
+                case "4":
                     try
                     {
                         user.SaveUser(Login, Password);
@@ -58,9 +61,10 @@ internal class Program
                         Console.WriteLine(ex.Message);
                     }
                     break;
-                case "4":
+                case "3":
                     try
                     {
+                        System.IO.File.Create("D:\\userList.txt");
                         user.Authorization(Login);
                     }
                     catch (Exception ex)
