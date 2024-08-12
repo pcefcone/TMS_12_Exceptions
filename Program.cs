@@ -1,14 +1,27 @@
 ﻿using System.Diagnostics;
 using System.Reflection.Metadata;
 using TMS_12_Exceptions;
+using System.IO;
 
 internal class Program
 {
     static void Main(string[] args)
     {
-        
+        try
+        {
+            StreamReader sr = new StreamReader("D:\\userList.txt");
+            StreamWriter sw = new StreamWriter("C:\\Test.txt");
+            sw.Close();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Exception: " + e.Message);
+        }
+        finally
+        {
+            Console.WriteLine("Executing finally block.");
+        }
 
-        
 
         string Login = string.Empty;
         string Password = string.Empty;
@@ -51,21 +64,21 @@ internal class Program
                         Console.WriteLine(ex.Message);
                     }
                     break;
-                case "4":
+                case "3":
                     try
                     {
-                        user.SaveUser(Login, Password);
+                        
+                        user.Authorization(Login);
                     }
                     catch (Exception ex)
                     {
                         Console.WriteLine(ex.Message);
                     }
                     break;
-                case "3":
+                case "4":
                     try
                     {
-                        System.IO.File.Create("D:\\userList.txt");
-                        user.Authorization(Login);
+                        user.SaveUser(Login, Password);
                     }
                     catch (Exception ex)
                     {
