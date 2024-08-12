@@ -1,22 +1,26 @@
-﻿using System.Reflection.Metadata;
+﻿using System.Diagnostics;
+using System.Reflection.Metadata;
 using TMS_12_Exceptions;
 
 internal class Program
 {
-    private static void Main(string[] args, User user)
+    static void Main(string[] args)
     {
+        
+
+
         string Login = string.Empty;
         string Password = string.Empty;
-        var User = new User(Login, Password);
+        var user = new User(Login, Password);
 
         while (true)
         {
             Console.WriteLine("Registration form:" +
-                "1. Login." +
-                "2. Password" +
-                "3. Authorization" +
-                "4. Save" +
-                "0. Exit");
+                "\n1. Login." +
+                "\n2. Password" +
+                "\n3. Authorization" +
+                "\n4. Save" +
+                "\n0. Exit");
             var choise = Console.ReadLine();
             switch (choise)
             {
@@ -25,7 +29,7 @@ internal class Program
                     {
                         Console.WriteLine("Input login:");
                         Login = Console.ReadLine();
-                        User.InputLogin(Login);
+                        user.InputLogin(Login);
                     }
                     catch (WrongLoginException ex)
                     {
@@ -37,7 +41,7 @@ internal class Program
                     {
                         Console.WriteLine("Input password");
                         Password = Console.ReadLine();
-                        User.InputPassword(Password);
+                        user.InputPassword(Password);
                     }
                     catch (WrongPasswordException ex)
                     {
@@ -47,7 +51,7 @@ internal class Program
                 case "3":
                     try
                     {
-                        User.SaveUser(Login, Password);
+                        user.SaveUser(Login, Password);
                     }
                     catch (Exception ex)
                     {
@@ -57,14 +61,17 @@ internal class Program
                 case "4":
                     try
                     {
-                        User.Authorization(Login);
+                        user.Authorization(Login);
                     }
                     catch (Exception ex)
                     {
                         Console.WriteLine(ex.Message);
                     }
                     break;
-                case "0":
+                    case "0":
+                    Console.WriteLine("Good bye!");
+                    Environment.Exit(0);
+                    break;
                 default:
                     break;
 
